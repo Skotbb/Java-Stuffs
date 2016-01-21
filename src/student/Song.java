@@ -1,8 +1,5 @@
-package student;
-
-import java.util.*;
-
-/*
+/* Modified by Scott Thompson 2016
+ *
  * Song class to hold strings for a song's artist, title, and lyrics
  * Do not add any methods, just implement the ones that are here.
  * Starting code by Prof. Boothe 2015
@@ -12,8 +9,16 @@ import java.util.*;
  *
  * @author boothe
  */
+package student;
+
+import java.util.*;
+
+
 public class Song implements Comparable<Song> {
-    // fields
+    
+    private String artist, 
+            title, 
+            lyrics;
 
     /**
      * Parameterized constructor
@@ -22,34 +27,44 @@ public class Song implements Comparable<Song> {
      * @param lyrics the lyrics as a string with linefeeds embedded
      */
     public Song(String artist, String title, String lyrics) {
+        this.artist = artist;
+        this.title = title;
+        this.lyrics = lyrics;
     }
 
     /**
      *
-     * @return
+     * @return a String for the Artist's name
      */
     public String getArtist() {
+        return artist;
     }
 
     /**
      *
-     * @return
+     * @return a string with the song's lyrics.
      */
     public String getLyrics() {
+        return lyrics;
     }
 
     /**
      *
-     * @return
+     * @return a string with the Song's name/title
      */
     public String getTitle() {
+        return title;
     }
 
     /**
      *
-     * @return
+     * @return String  in format of: "artist, title"
      */
     public String toString() {
+        StringBuilder str = new StringBuilder();
+        str.append(artist + ", " + title + "\n");
+        
+        return str.toString();
     }
 
     /**
@@ -64,9 +79,29 @@ public class Song implements Comparable<Song> {
      *    songs are together, but in alpha order.  
      */
     public int compareTo(Song song2) {
+        // named constants are used for clarity in the code
+        final int BEFORE = -1;
+        final int EQUAL = 0;
+        final int AFTER = 1;
+        
+        if (song2 == null)
+            return AFTER; // shouldn't be any null objects, but if there are
+                          // put them at the end
+        if (this == song2) return EQUAL;  //If songs are the same, set them
+                                          //equal
+        
+            //Compare the Artists first                            
+        if (this.artist.compareToIgnoreCase(song2.artist) < 0) return BEFORE;
+        if (this.artist.compareToIgnoreCase(song2.artist) > 0) return AFTER;
+        
+            //Then compare the Titles
+        if (this.title.compareToIgnoreCase(song2.title) < 0) return BEFORE;
+        if (this.title.compareToIgnoreCase(song2.title) > 0) return AFTER; 
+        
+        return EQUAL;
     }
 
- \
+ 
     /**
      * testing method to unit test this class
      * @param args
