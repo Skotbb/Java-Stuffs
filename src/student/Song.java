@@ -17,19 +17,56 @@ public class Song implements Comparable<Song> {
     private String artist = "unknown";
     private String title = "unknown";
     private String lyrics = "";
-
-    /**
-     * Parameterized constructor
-     * @param artist the author of the song
-     * @param title the title of the song
-     * @param lyrics the lyrics as a string with linefeeds embedded
-     */
+    private String tempString = "";
+    
     public Song(String artist, String title, String lyrics) {
-        this.artist = artist;
-        this.title = title;
-        this.lyrics = lyrics;
+        this.setArtist(artist);
+        this.setTitle(title);
+        this.setLyrics(lyrics);
     }
-
+    
+    /**
+     * Sanitizes string
+     * @param string
+     * @return string
+     */
+    private String sanitizeString(String string) {
+        string = string.trim();
+        string = string.replaceAll("[^a-zA-Z0-9-_!?&():\\,\"\'\\s]", "");
+        string = string.replaceAll("\"\'", "\\\\1");
+        return string;
+    }
+    
+    /**
+     * Verifies whether or not string is valid for use; 
+     * if it is, sets tempString to sanitized string
+     * @param string Min 1 char, not starting with whitespace
+     * @return whether or not the string is valid
+     */
+    private boolean minReqString(String string) {
+        if (string.length() > 1) string = sanitizeString(string);
+        else return false;
+        
+        if (string.length() > 1) {
+            this.tempString = string;
+            return true;
+        }
+        else return false;
+    }
+    
+    public void setArtist(String string) {
+        if (minReqString(string))
+            this.artist = this.tempString;
+    }
+    public void setTitle(String string) {
+        if (minReqString(string))
+            this.title = this.tempString;
+    }
+    public void setLyrics(String string) {
+        if (minReqString(string))
+            this.lyrics = this.tempString;
+    }
+    
     /**
      *
      * @return a String for the Artist's name
