@@ -1,5 +1,6 @@
 /* Modified by Scott Thompson 2016
- *
+ * Modified by Nicolas DesJardins 2016
+ * 
  * Song class to hold strings for a song's artist, title, and lyrics
  * Do not add any methods, just implement the ones that are here.
  * Starting code by Prof. Boothe 2015
@@ -11,14 +12,11 @@
  */
 package student;
 
-import java.util.*;
-
-
 public class Song implements Comparable<Song> {
     
-    private String artist, 
-            title, 
-            lyrics;
+    private String artist = "unknown";
+    private String title = "unknown";
+    private String lyrics = "";
 
     /**
      * Parameterized constructor
@@ -37,7 +35,7 @@ public class Song implements Comparable<Song> {
      * @return a String for the Artist's name
      */
     public String getArtist() {
-        return artist;
+        return this.artist;
     }
 
     /**
@@ -45,7 +43,7 @@ public class Song implements Comparable<Song> {
      * @return a string with the song's lyrics.
      */
     public String getLyrics() {
-        return lyrics;
+        return this.lyrics;
     }
 
     /**
@@ -53,16 +51,17 @@ public class Song implements Comparable<Song> {
      * @return a string with the Song's name/title
      */
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     /**
      *
      * @return String  in format of: "artist, title"
      */
+    @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        str.append(artist + ", " + title + "\n");
+        str.append(artist).append(", ").append(title).append("\n");
         
         return str.toString();
     }
@@ -78,6 +77,7 @@ public class Song implements Comparable<Song> {
      *    case first by author then by title so that the all of an artist's 
      *    songs are together, but in alpha order.  
      */
+    @Override
     public int compareTo(Song song2) {
         // named constants are used for clarity in the code
         final int BEFORE = -1;
