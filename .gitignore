@@ -1,1 +1,9 @@
-/build/
+# Blacklist all
+*
+
+# Whitelist
+!src
+!*.txt
+
+# Required
+!.gitignore
