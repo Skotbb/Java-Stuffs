@@ -1,5 +1,6 @@
 /* Modified by Scott Thompson 2016
  * Modified by Nicolas DesJardins 2016
+ *     I forgot to read the comments :D
  * 
  * Song class to hold strings for a song's artist, title, and lyrics
  * Do not add any methods, just implement the ones that are here.
@@ -25,46 +26,14 @@ public class Song implements Comparable<Song> {
         this.setLyrics(lyrics);
     }
     
-    /**
-     * Sanitizes string
-     * @param string
-     * @return string
-     */
-    private String sanitizeString(String string) {
-        string = string.trim();
-        string = string.replaceAll("[^a-zA-Z0-9-_!?&():\\,\"\'\\s]", "");
-        string = string.replaceAll("\"\'", "\\\\1");
-        return string;
-    }
-    
-    /**
-     * Verifies whether or not string is valid for use; 
-     * if it is, sets tempString to sanitized string
-     * @param string Min 1 char, not starting with whitespace
-     * @return whether or not the string is valid
-     */
-    private boolean minReqString(String string) {
-        if (string.length() > 1) string = sanitizeString(string);
-        else return false;
-        
-        if (string.length() > 1) {
-            this.tempString = string;
-            return true;
-        }
-        else return false;
-    }
-    
     public void setArtist(String string) {
-        if (minReqString(string))
-            this.artist = this.tempString;
+        this.artist = string;
     }
     public void setTitle(String string) {
-        if (minReqString(string))
-            this.title = this.tempString;
+        this.title = string;
     }
     public void setLyrics(String string) {
-        if (minReqString(string))
-            this.lyrics = this.tempString;
+        this.lyrics = string;
     }
     
     /**
