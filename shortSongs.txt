@@ -9,11 +9,11 @@ ARTIST="unknown"
 TITLE="Pop Goes The Weasel"
 LYRICS="All around the mulberry bush
 The monkey chased the weasel.
-The monkey thought ’twas all in good fun
+The monkey thought ï¿½twas all in good fun
 Pop! goes the weasel
 
 A penny for a spool of thread,
-A penny for a needle—
+A penny for a needleï¿½
 That's the way the money goes,
 Pop! goes the weasel
 
