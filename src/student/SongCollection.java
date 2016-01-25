@@ -1,21 +1,5 @@
-//Modified by Alexander Page 1/24/16
+//Modified by Alexander Page 1/25/16
 
-/*
-================================================================================
---------------------------------------------------------------------------------
-Okay, so. I've made a lot of changes to the file. I've created a stringbuilder
-for the lyrics and it seems to work okay on my end. I've also added a few things
-and moved around a few lines to work with what I thought would work for the 
-project. I also hardcoded in the filename for the reader because I could not get
-it to work in the File>Project Properties>Run>Arguments thingy. I've tested it
-out and it still gets an error at the very end after processing through all of
-the shortSongs.txt file. If either of you could take a look at it while I am 
-at work tomorrow that would be pretty rad. I get out of work tomorrow(Monday) at
-4:00pm. You can reach me in case of emergency or if you despirately need to 
-tell me that I am an idiot on my cellphone, (207)841-7612. -Alexander Page 1/24/16
---------------------------------------------------------------------------------
-================================================================================
-*/
 
 
 package student;
@@ -71,8 +55,8 @@ public class SongCollection {
             songFileScanner = new Scanner(songsFile);
             
             if (songFileScanner.hasNextLine()) {
+                StringBuilder str = new StringBuilder();
                 while (songFileScanner.hasNextLine()) {
-                    StringBuilder str = new StringBuilder();
                     buffer = songFileScanner.nextLine();
                     
                     /*
@@ -82,9 +66,6 @@ public class SongCollection {
                     if (buffer.startsWith("ARTIST=")) {
                         System.out.println("Parsing artists");
                         
-                        //currentSong = songs[songs.length - 1]; <-- this is
-                        //just setting currentSong to null because songs[] is
-                        //never actually filled before this. -Alexander Page
                         /*
                         Parses out ARTIST=" and the ending "
                         */
@@ -109,22 +90,22 @@ public class SongCollection {
                         */
                         buffer = buffer.substring(8, (buffer.length()));
                         str.append(buffer);
+                        System.out.println(str);
                         
                     }
                     // For the rest of the lyrics
                     else {
                         System.out.println("Parsing lyrics still");
                         str.append(buffer);
-                        if(songFileScanner.nextLine().startsWith("ARTIST=")){
+                        }
                             lyrics = str.toString();
                             currentSong.setLyrics(lyrics); 
                             songsList.add(currentSong);
-                           
-                        }
-                    }
+                            //songs = (Song[]) (songsList.toArray());
                     
                 }
-                songs = (Song[]) songsList.toArray();
+                
+                
             }
             else
                 System.out.println("File is blank.");
