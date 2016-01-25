@@ -58,7 +58,7 @@ public class SongCollection {
                     */
                     if (buffer.startsWith("ARTIST=")) {
                         System.out.println("Parsing artists");
-                        currentSong = songs[songs.length - 1];
+                        //currentSong = songs[songs.length - 1];
                         /*
                         Parses out ARTIST=" and the ending "
                         */
