@@ -26,6 +26,10 @@ public class Song implements Comparable<Song> {
         this.setLyrics(lyrics);
     }
     
+    public Song() {
+        
+    }
+    
     public void setArtist(String string) {
         this.artist = string;
     }
