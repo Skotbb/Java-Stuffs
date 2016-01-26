@@ -37,9 +37,10 @@ public class SongCollection {
     public SongCollection(String filename) {
         File songsFile;
         Scanner songFileScanner;
-        String buffer, lyrics;
-        Song currentSong = new Song("","","");
+        String buffer;
+        Song currentSong = new Song();
         ArrayList <Song> songsList = new ArrayList();
+        boolean isNewSong = true;
         
         try {
             songsFile = new File("shortSongs.txt");
@@ -64,8 +65,11 @@ public class SongCollection {
                     artist
                     */
                     if (buffer.startsWith("ARTIST=")) {
-                        System.out.println("Parsing artists");
-                        
+                        if (!isNewSong) {
+                            currentSong.setLyrics(str.toString());
+                            str.delete(0, str.length());
+                            currentSong = new Song();
+                        }
                         /*
                         Parses out ARTIST=" and the ending "
                         */
@@ -75,7 +79,6 @@ public class SongCollection {
                         
                     }
                     else if (buffer.startsWith("TITLE=")) {
-                        System.out.println("Parsing titles");
                         /*
                         Parses out TITLE=" and the ending "
                         */
@@ -84,7 +87,7 @@ public class SongCollection {
                         
                     }
                     else if (buffer.startsWith("LYRICS=")) {
-                        System.out.println("Parsing lyrics");
+                        isNewSong = false;
                         /*
                         Parses out LYRICS=" and the ending "
                         */
@@ -95,17 +98,14 @@ public class SongCollection {
                     }
                     // For the rest of the lyrics
                     else {
-                        System.out.println("Parsing lyrics still");
                         str.append(buffer);
-                        }
-                            lyrics = str.toString();
-                            currentSong.setLyrics(lyrics); 
-                            songsList.add(currentSong);
-                            //songs = (Song[]) (songsList.toArray());
+                    }
+                    
+                    songsList.add(currentSong);
                     
                 }
-                
-                
+                currentSong.setLyrics(str.toString());
+                str.delete(0, str.length());
             }
             else
                 System.out.println("File is blank.");
