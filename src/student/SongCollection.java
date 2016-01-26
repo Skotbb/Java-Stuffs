@@ -41,6 +41,7 @@ public class SongCollection {
         Song currentSong = new Song();
         ArrayList <Song> songsList = new ArrayList();
         boolean isNewSong = true;
+        StringBuilder str = new StringBuilder();
         
         try {
             songsFile = new File("shortSongs.txt");
@@ -56,7 +57,6 @@ public class SongCollection {
             songFileScanner = new Scanner(songsFile);
             
             if (songFileScanner.hasNextLine()) {
-                StringBuilder str = new StringBuilder();
                 while (songFileScanner.hasNextLine()) {
                     buffer = songFileScanner.nextLine();
                     
@@ -93,9 +93,7 @@ public class SongCollection {
                         Parses out LYRICS=" and the ending "
                         */
                         buffer = buffer.substring(8, (buffer.length()));
-                        str.append(buffer);
-                        System.out.println(str);
-                        
+                        str.append(buffer);                        
                     }
                     // For the rest of the lyrics
                     else {
@@ -115,13 +113,21 @@ public class SongCollection {
         catch (Exception e) {
             System.out.println("Undocumented exception.");
         }
-	// use a try catch block
-        // read in the song file and build the songs array
-        // you must use a StringBuilder to read in the lyrics!
         
+        songs = songsList.toArray(new Song[songsList.size()]);
         
-        
+        System.out.println(this.toString());
         // sort the songs array
+    }
+    
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+        
+        for (int i = 0; i < songs.length; i++) {
+            string.append(songs[i].getArtist()).append(" - ").append(songs[i].getTitle()).append("\n");
+        }
+        
+        return string.toString();
     }
  
     /**
