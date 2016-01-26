@@ -99,7 +99,7 @@ public class SongCollection {
                     }
                     // For the rest of the lyrics
                     else {
-                        str.append(buffer);
+                        str.append(buffer).append("\n");
                     }
                 }
                 currentSong.setLyrics(str.toString());
