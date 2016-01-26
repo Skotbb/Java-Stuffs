@@ -7,6 +7,7 @@ package student;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /*
@@ -115,8 +116,9 @@ public class SongCollection {
             System.out.println("Undocumented exception.");
         }
         
-        songs = songsList.toArray(new Song[songsList.size()]);
         // sort the songs array
+        songs = songsList.toArray(new Song[songsList.size()]);
+        Arrays.sort(songs, null);    //Added Sort (ST 1/26/16)    
     }
     
     @Override
@@ -124,7 +126,8 @@ public class SongCollection {
         StringBuilder string = new StringBuilder();
         
         for (Song song : songs) {
-            string.append(song.getArtist()).append(" - ").append(song.getTitle()).append("\n");
+            string.append(song.getArtist()).append(" - ").
+                    append(song.getTitle()).append("\n");
         }
         
         return string.toString();
@@ -137,8 +140,16 @@ public class SongCollection {
     public Song[] getAllSongs() {
         return songs;
     }
- 
-    /**
+    
+    //Modified by Scott Thompson 1/26/16 -added method and tested.
+    public void showList(){
+         System.out.println("Total songs = " + songs.length);
+         for(int i=0; i < songs.length; i++){
+             System.out.printf("%-20s %s\n",
+                     songs[i].getArtist(),songs[i].getTitle());
+         }
+        }
+     /**
      * unit testing method
      * @param args
      */
@@ -149,7 +160,13 @@ public class SongCollection {
         }
         
         SongCollection sc = new SongCollection(args[0]);
+        
+        /*SongCollection sc = new SongCollection("allSongs.txt");
+        sc.showList();*/ //Testing
 
-        // todo: show song count and first 10 songs (name & title only, 1 per line)
+        // show song count and first 10 songs (name & title only, 1 per line)
+            //^ Added as a method for SongCollection class. (ST)
+        
     }
+        
 }
