@@ -44,7 +44,8 @@ public class SongCollection {
         StringBuilder str = new StringBuilder();
         
         try {
-            songsFile = new File("shortSongs.txt");
+            songsFile = new File(filename);
+            songsFile.setReadOnly();
             
             // when told to throw shit, start here
             if (!songsFile.exists())
@@ -115,16 +116,15 @@ public class SongCollection {
         }
         
         songs = songsList.toArray(new Song[songsList.size()]);
-        
-        System.out.println(this.toString());
         // sort the songs array
     }
     
+    @Override
     public String toString() {
         StringBuilder string = new StringBuilder();
         
-        for (int i = 0; i < songs.length; i++) {
-            string.append(songs[i].getArtist()).append(" - ").append(songs[i].getTitle()).append("\n");
+        for (Song song : songs) {
+            string.append(song.getArtist()).append(" - ").append(song.getTitle()).append("\n");
         }
         
         return string.toString();
