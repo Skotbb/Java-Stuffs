@@ -67,6 +67,7 @@ public class SongCollection {
                     if (buffer.startsWith("ARTIST=")) {
                         if (!isNewSong) {
                             currentSong.setLyrics(str.toString());
+                            songsList.add(currentSong);
                             str.delete(0, str.length());
                             currentSong = new Song();
                         }
@@ -100,11 +101,9 @@ public class SongCollection {
                     else {
                         str.append(buffer);
                     }
-                    
-                    songsList.add(currentSong);
-                    
                 }
                 currentSong.setLyrics(str.toString());
+                songsList.add(currentSong);
                 str.delete(0, str.length());
             }
             else
