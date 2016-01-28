@@ -1,3 +1,4 @@
+//Modified by Scott Thompson 1/27/16
 //Modified by Alexander Page 1/25/16
 
 
@@ -143,12 +144,20 @@ public class SongCollection {
     
     //Modified by Scott Thompson 1/26/16 -added method and tested.
     public void showList(){
-         System.out.println("Total songs = " + songs.length);
-         for(int i=0; i < songs.length; i++){
-             System.out.printf("%-20s %s\n",
-                     songs[i].getArtist(),songs[i].getTitle());
+        System.out.println("Total songs = " + songs.length);
+        if(songs.length < 10){
+            for(int i=0; i < songs.length || i < 10; i++){
+                System.out.printf("%-20s %s\n",
+                    songs[i].getArtist(),songs[i].getTitle());
+            }
          }
+        else{
+            for(int i=0;i < 10; i++){
+                System.out.printf("%-20s %s\n",
+                    songs[i].getArtist(),songs[i].getTitle());
+            }
         }
+    }
      /**
      * unit testing method
      * @param args
@@ -160,6 +169,7 @@ public class SongCollection {
         }
         
         SongCollection sc = new SongCollection(args[0]);
+            //sc.showList();    //Testing
         
         /*SongCollection sc = new SongCollection("allSongs.txt");
         sc.showList();*/ //Testing
