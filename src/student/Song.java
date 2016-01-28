@@ -93,6 +93,7 @@ public class Song implements Comparable<Song> {
         final int BEFORE = -1;
         final int EQUAL = 0;
         final int AFTER = 1;
+        int comparison =0;
         
         if (song2 == null)
             return AFTER; // shouldn't be any null objects, but if there are
@@ -101,12 +102,14 @@ public class Song implements Comparable<Song> {
                                           //equal
         
             //Compare the Artists first                            
-        if (this.artist.compareToIgnoreCase(song2.artist) < 0) return BEFORE;
-        if (this.artist.compareToIgnoreCase(song2.artist) > 0) return AFTER;
+        
+        comparison = this.getArtist().compareToIgnoreCase(song2.getArtist());
+        if (comparison != EQUAL) return comparison;
         
             //Then compare the Titles
-        if (this.title.compareToIgnoreCase(song2.title) < 0) return BEFORE;
-        if (this.title.compareToIgnoreCase(song2.title) > 0) return AFTER; 
+        
+        comparison = this.getTitle().compareToIgnoreCase(song2.getTitle());
+        if (comparison != EQUAL) return comparison;
         
         return EQUAL;
     }
