@@ -13,6 +13,8 @@
  */
 package student;
 
+import java.util.*;
+
 public class Song implements Comparable<Song> {
     
     private String artist = "unknown";
@@ -113,6 +115,14 @@ public class Song implements Comparable<Song> {
         
         return EQUAL;
     }
+    
+    public static class CmpArtist extends CmpCnt implements Comparator<Song>{
+        public int compare(Song s1, Song s2){
+           cmpCnt++;
+           
+           return s1.getArtist().compareToIgnoreCase(s2.getArtist());
+        }  
+        }
 
  
     /**
@@ -158,5 +168,15 @@ public class Song implements Comparable<Song> {
         System.out.println("Song1 vs Song3 = " + s1.compareTo(s3));
         System.out.println("Song3 vs Song1 = " + s3.compareTo(s1));
         System.out.println("Song1 vs Song1 = " + s1.compareTo(s1));
+        
+        
+        Comparator<Song> cmp = new Song.CmpArtist();
+        System.out.println("\ntesting compare artists:");
+        System.out.println("Song 1 vs Song 2 = " + cmp.compare(s1,s2));
+        System.out.println("Song 2 vs Song 1 = " + cmp.compare(s2,s1));
+        System.out.println("Song 1 vs Song 3 = " + cmp.compare(s1,s3));
+        System.out.println("Song 3 vs Song 1 = " + cmp.compare(s3,s1));
+        System.out.println("Song 1 vs Song 1 = " + cmp.compare(s1,s1));
+    
     }
 }
