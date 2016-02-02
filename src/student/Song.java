@@ -1,4 +1,5 @@
-/* Modified by Scott Thompson 2016
+/* Modified by Angela Tucci
+ * Modified by Scott Thompson 2016
  * Modified by Nicolas DesJardins 2016
  *     I forgot to read the comments :D
  * 
@@ -115,7 +116,7 @@ public class Song implements Comparable<Song> {
         
         return EQUAL;
     }
-    
+    // Method added by Angela Tucci
     public static class CmpArtist extends CmpCnt implements Comparator<Song>{
         public int compare(Song s1, Song s2){
            cmpCnt++;
