@@ -96,7 +96,7 @@ public class SongCollection {
                         Parses out LYRICS=" and the ending "
                         */
                         buffer = buffer.substring(8, (buffer.length()));
-                        str.append(buffer);                        
+                        str.append(buffer + "\n");                        
                     }
                     // For the rest of the lyrics
                     else {

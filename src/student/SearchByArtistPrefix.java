@@ -102,8 +102,24 @@ public class SearchByArtistPrefix {
     public static void main(String[] args) {
         SongCollection sc = new SongCollection("allSongs.txt");
         SearchByArtistPrefix sbap = new SearchByArtistPrefix(sc);
-        System.out.println("searching for: santana");
-        Song[] byArtistResult = sbap.search("santana");
+        
+        System.out.println("searching for: Beatles");
+        Song[] byArtistResult = sbap.search("beatles");
+            
+//        System.out.println("searching for: santana");
+//        Song[] byArtistResult = sbap.search("santana");
+
+//        System.out.println("searching for: arlo");
+//        Song[] byArtistResult = sbap.search("arlo");
+    
+//        System.out.println("searching for: a");
+//        Song[] byArtistResult = sbap.search("a");
+        
+//        System.out.println("searching for: z");
+//        Song[] byArtistResult = sbap.search("z");
+        
+//        System.out.println("searching for: x");
+//        Song[] byArtistResult = sbap.search("x");
         
         if(byArtistResult.length > 0){
             System.out.println("Total number of songs: "+byArtistResult.length+"\n");
@@ -114,6 +130,7 @@ public class SearchByArtistPrefix {
         else if(byArtistResult.length == 0){
             System.out.println("No results found");
         }
-        
-        }
     }
+    }
+    
+    
