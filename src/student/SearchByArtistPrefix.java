@@ -60,7 +60,7 @@ public class SearchByArtistPrefix {
                 list.add(songs[i]);
                 
                 if(i == songs.length-2){    //If near the end, manually add last element
-                    list.add(songs[i+1]); System.out.println("i4= " + i);   //Keeps while loop from going out of bounds
+                    list.add(songs[i+1]);   //Keeps while loop from going out of bounds
                     i = 1;                  //Resets i to kick out of loop.
                 }
                 else
@@ -100,12 +100,37 @@ public class SearchByArtistPrefix {
      * @param args  command line arguments
      */
     public static void main(String[] args) {
-        SongCollection sc = new SongCollection("allSongs.txt");
-        SearchByArtistPrefix sbap = new SearchByArtistPrefix(sc);
+        if (args.length == 0) {
+//            System.err.println("usage: prog songfile [search string]");
+//            return;
+            SongCollection sc = new SongCollection("allSongs.txt");
+            SearchByArtistPrefix sbap = new SearchByArtistPrefix(sc);
         
-        System.out.println("searching for: Beatles");
-        Song[] byArtistResult = sbap.search("beatles");
-            
+            System.out.println("searching for: santana");
+            Song[] byArtistResult = sbap.search("santana");
+        
+            if(byArtistResult.length > 0){
+                System.out.println("Total number of songs: "+byArtistResult.length+"\n");
+                for(int i = 0;i<10 && i<byArtistResult.length;i++){
+                    System.out.println(byArtistResult[i].getArtist()
+                        +"   "+byArtistResult[i].getTitle());
+                }
+            }
+            else if(byArtistResult.length == 0){
+                System.out.println("No results found");
+            }
+        }
+        
+        SongCollection sc = new SongCollection(args[0]);
+        SearchByArtistPrefix sbap = new SearchByArtistPrefix(sc);
+
+        if (args.length > 1) {
+            System.out.println("searching for: " + args[1]);
+            Song[] byArtistResult = sbap.search(args[1]);
+
+            // to do: show first 10 matches
+        }
+          
 //        System.out.println("searching for: santana");
 //        Song[] byArtistResult = sbap.search("santana");
 
@@ -121,15 +146,7 @@ public class SearchByArtistPrefix {
 //        System.out.println("searching for: x");
 //        Song[] byArtistResult = sbap.search("x");
         
-        if(byArtistResult.length > 0){
-            System.out.println("Total number of songs: "+byArtistResult.length+"\n");
-            for(int i = 0;i<10 && i<byArtistResult.length;i++){
-                System.out.println(byArtistResult[i].getArtist()+"   "+byArtistResult[i].getTitle());
-            }
-        }
-        else if(byArtistResult.length == 0){
-            System.out.println("No results found");
-        }
+        
     }
     }
     
