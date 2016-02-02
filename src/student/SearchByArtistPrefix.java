@@ -121,10 +121,12 @@ public class SearchByArtistPrefix {
             }
         }
         
-        SongCollection sc = new SongCollection(args[0]);
-        SearchByArtistPrefix sbap = new SearchByArtistPrefix(sc);
+        
 
         if (args.length > 1) {
+            SongCollection sc = new SongCollection(args[0]);
+            SearchByArtistPrefix sbap = new SearchByArtistPrefix(sc);
+            
             System.out.println("searching for: " + args[1]);
             Song[] byArtistResult = sbap.search(args[1]);
 
