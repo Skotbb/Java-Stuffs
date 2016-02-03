@@ -92,19 +92,20 @@ public class SongCollection {
     }
         // convert the arraylist into an array of the same size
         songs = songList.toArray(new Song[songList.size()]);
+        Arrays.sort(songs);
         //songs = getAllSongs();
-        Song key;
-        int i;
-        for(int j=1;j<songs.length;j++){
-            key = songs[j];
-            i = j-1;
-            while((i>-1)&&(songs[i].compareTo(key)>=1)){
-                songs[i+1] = songs[i];
-                i--;
-            }
-            songs[i+1]=key;
-            //System.out.println(Arrays.toString(songs));
-        }
+//        Song key;
+//        int i;
+//        for(int j=1;j<songs.length;j++){
+//            key = songs[j];
+//            i = j-1;
+//            while((i>-1)&&(songs[i].compareTo(key)>=1)){
+//                songs[i+1] = songs[i];
+//                i--;
+//            }
+//            songs[i+1]=key;
+//            //System.out.println(Arrays.toString(songs));
+//        }
     }
  
     /**
