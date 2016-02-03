@@ -1,7 +1,9 @@
-/* Modified by Scott Thompson 2016
- * Modified by Nicolas DesJardins 2016
- *     I forgot to read the comments :D
- * 
+//Modified by Angela Tucci
+package student;
+
+import java.util.*;
+
+/*
  * Song class to hold strings for a song's artist, title, and lyrics
  * Do not add any methods, just implement the ones that are here.
  * Starting code by Prof. Boothe 2015
@@ -11,69 +13,64 @@
  *
  * @author boothe
  */
-package student;
-
 public class Song implements Comparable<Song> {
+    // fields
+    private String artist, title, lyrics;
     
-    private String artist = "unknown";
-    private String title = "unknown";
-    private String lyrics = "";
-    private String tempString = "";
-    
+
+    /**
+     * Parameterized constructor
+     * @param artist the author of the song
+     * @param title the title of the song
+     * @param lyrics the lyrics as a string with linefeeds embedded
+     */
     public Song(String artist, String title, String lyrics) {
-        this.setArtist(artist);
-        this.setTitle(title);
-        this.setLyrics(lyrics);
+        this.artist = artist;
+        this.title = title;
+        this.lyrics = lyrics;
     }
-    
-    public Song() {
-        
-    }
-    
-    public void setArtist(String string) {
-        this.artist = string;
-    }
-    public void setTitle(String string) {
-        this.title = string;
-    }
-    public void setLyrics(String string) {
-        this.lyrics = string;
-    }
-    
+
     /**
      *
-     * @return a String for the Artist's name
+     * @return
      */
     public String getArtist() {
-        return this.artist;
+        
+        return artist;
     }
 
     /**
      *
-     * @return a string with the song's lyrics.
+     * @return
      */
     public String getLyrics() {
-        return this.lyrics;
+        
+        return lyrics;
     }
 
     /**
      *
-     * @return a string with the Song's name/title
+     * @return
      */
     public String getTitle() {
-        return this.title;
+        
+        return title;
     }
 
     /**
      *
-     * @return String  in format of: "artist, title"
+     * @return
      */
-    @Override
     public String toString() {
-        StringBuilder str = new StringBuilder();
-        str.append(artist).append(", ").append(title).append("\n");
+        // create a stringbuilder to display artist and title
+        StringBuilder sb = new StringBuilder();
+        sb.append(artist);
+        sb.append("\n");
+        sb.append(title);
+        sb.append("\n");
         
-        return str.toString();
+        return sb.toString();
+        
     }
 
     /**
@@ -86,33 +83,39 @@ public class Song implements Comparable<Song> {
      *    after or is the same.  Used for a "natural" sorting order.  In this 
      *    case first by author then by title so that the all of an artist's 
      *    songs are together, but in alpha order.  
-     */
-    @Override
+     **/
     public int compareTo(Song song2) {
-        // named constants are used for clarity in the code
-        final int BEFORE = -1;
-        final int EQUAL = 0;
-        final int AFTER = 1;
-        int comparison =0;
+        int BEFORE = -1;
+        int EQUAL = 0;
+        int AFTER = 1;
         
-        if (song2 == null)
-            return AFTER; // shouldn't be any null objects, but if there are
-                          // put them at the end
-        if (this == song2) return EQUAL;  //If songs are the same, set them
-                                          //equal
-        
-            //Compare the Artists first                            
-        
-        comparison = this.getArtist().compareToIgnoreCase(song2.getArtist());
-        if (comparison != EQUAL) return comparison;
-        
-            //Then compare the Titles
-        
-        comparison = this.getTitle().compareToIgnoreCase(song2.getTitle());
-        if (comparison != EQUAL) return comparison;
-        
+        // if the object is null
+        if(this == null){
+            return AFTER;
+        }
+        // variables to compare artists and titles
+        int compareArtist = this.getArtist().compareToIgnoreCase(song2.getArtist());
+        int compareTitle = this.getTitle().compareToIgnoreCase(song2.getTitle());
+        // compare the artists
+        if(compareArtist != EQUAL){
+            return compareArtist;
+        }
+        // compare the titles
+        if(compareTitle != EQUAL){
+            return compareTitle;
+        }
+        // if they have the same artist and title...
         return EQUAL;
     }
+    
+    public static class CmpArtist extends CmpCnt implements Comparator<Song>{
+        @Override
+        public int compare(Song s1, Song s2){
+           cmpCnt++;
+           
+           return s1.getArtist().compareToIgnoreCase(s2.getArtist());
+        }  
+        }
 
  
     /**
@@ -158,5 +161,14 @@ public class Song implements Comparable<Song> {
         System.out.println("Song1 vs Song3 = " + s1.compareTo(s3));
         System.out.println("Song3 vs Song1 = " + s3.compareTo(s1));
         System.out.println("Song1 vs Song1 = " + s1.compareTo(s1));
+        
+        Comparator<Song> cmp = new Song.CmpArtist();
+        System.out.println("\ntesting compare artists:");
+        System.out.println("Song 1 vs Song 2 = " + cmp.compare(s1,s2));
+        System.out.println("Song 2 vs Song 1 = " + cmp.compare(s2,s1));
+        System.out.println("Song 1 vs Song 3 = " + cmp.compare(s1,s3));
+        System.out.println("Song 3 vs Song 1 = " + cmp.compare(s3,s1));
+        System.out.println("Song 1 vs Song 1 = " + cmp.compare(s1,s1));
     }
+    
 }
