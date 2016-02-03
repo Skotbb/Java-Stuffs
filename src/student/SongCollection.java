@@ -47,7 +47,73 @@ public class SongCollection {
         StringBuilder lyrics = new StringBuilder();
         int count=0;
         try {
+<<<<<<< HEAD
             in = new Scanner(new FileReader(filename));
+=======
+            songsFile = new File(filename);
+            songsFile.setReadOnly();
+            
+            // when told to throw shit, start here
+            if (!songsFile.exists())
+                System.out.println("File doesn't exist.");
+            if (!songsFile.canRead())
+                System.out.println("File cannot read.");
+            if (songsFile.isDirectory())
+                System.out.println("File is a directory.");
+            
+            songFileScanner = new Scanner(songsFile);
+            
+            if (songFileScanner.hasNextLine()) {
+                while (songFileScanner.hasNextLine()) {
+                    buffer = songFileScanner.nextLine();
+                    
+                    /*
+                    If there's a new song entry, it'll always start with the 
+                    artist
+                    */
+                    if (buffer.startsWith("ARTIST=")) {
+                        if (!isNewSong) {
+                            currentSong.setLyrics(str.toString());
+                            songsList.add(currentSong);
+                            str.delete(0, str.length());
+                            currentSong = new Song();
+                        }
+                        /*
+                        Parses out ARTIST=" and the ending "
+                        */
+                        buffer = buffer.substring(8, (buffer.length() - 1));
+                        
+                        currentSong.setArtist(buffer);
+                        
+                    }
+                    else if (buffer.startsWith("TITLE=")) {
+                        /*
+                        Parses out TITLE=" and the ending "
+                        */
+                        buffer = buffer.substring(7, (buffer.length() - 1));
+                        currentSong.setTitle(buffer);
+                        
+                    }
+                    else if (buffer.startsWith("LYRICS=")) {
+                        isNewSong = false;
+                        /*
+                        Parses out LYRICS=" and the ending "
+                        */
+                        buffer = buffer.substring(8, (buffer.length()));
+                        str.append(buffer + "\n");                        
+                    }
+                    // For the rest of the lyrics
+                    else {
+                        str.append(buffer).append("\n");
+                    }
+                }
+                currentSong.setLyrics(str.toString());
+                songsList.add(currentSong);
+                str.delete(0, str.length());
+            }
+            else
+                System.out.println("File is blank.");
+>>>>>>> refs/remotes/origin/Part-2
         }
         catch(FileNotFoundException ex){
             System.out.println("File not found.");
